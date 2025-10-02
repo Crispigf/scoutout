@@ -26,8 +26,19 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
+// Persistent packet store (in production, this would be a database)
+let packetCache = [];
+let lastGenerationTime = 0;
+const CACHE_DURATION = 60000; // 1 minute
+
 // Mock packet capture data with IDS analysis
 const generateMockPackets = (count = 50) => {
+  // Use cached packets if they're recent
+  const now = Date.now();
+  if (packetCache.length > 0 && (now - lastGenerationTime) < CACHE_DURATION) {
+    return packetCache;
+  }
+
   const packets = [];
   const protocols = ['TCP', 'UDP', 'ICMP', 'HTTP', 'HTTPS', 'FTP', 'SSH'];
   const sourceIPs = ['192.168.1.100', '10.0.0.15', '172.16.0.50', '192.168.0.25', '10.1.1.10'];
@@ -62,7 +73,11 @@ const generateMockPackets = (count = 50) => {
     packets.push(packet);
   }
   
-  return packets.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  const sorted = packets.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  packetCache = sorted;
+  lastGenerationTime = now;
+  
+  return sorted;
 };
 
 // Routes

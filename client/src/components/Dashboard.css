@@ -1,0 +1,169 @@
+.dashboard-container {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard-header {
+  margin-bottom: 24px;
+}
+
+.dashboard-header h2 {
+  margin: 0 0 8px 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.dashboard-subtitle {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.no-devices {
+  text-align: center;
+  padding: 48px;
+  color: #999;
+}
+
+.device-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.device-card {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.device-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.device-card.threat-level-critical {
+  border-color: #d32f2f;
+  background: #ffebee;
+}
+
+.device-card.threat-level-high {
+  border-color: #f57c00;
+  background: #fff3e0;
+}
+
+.device-card.threat-level-medium {
+  border-color: #fbc02d;
+  background: #fffde7;
+}
+
+.device-card.threat-level-low {
+  border-color: #7cb342;
+  background: #f1f8e9;
+}
+
+.device-card.threat-level-none {
+  border-color: #e0e0e0;
+  background: white;
+}
+
+.device-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.device-icon {
+  font-size: 24px;
+}
+
+.device-ip {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+.device-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+.stat-value.threat-count {
+  color: #d32f2f;
+}
+
+.device-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.last-seen {
+  color: #666;
+}
+
+.threat-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.threat-badge.threat-level-critical {
+  background: #d32f2f;
+  color: white;
+}
+
+.threat-badge.threat-level-high {
+  background: #f57c00;
+  color: white;
+}
+
+.threat-badge.threat-level-medium {
+  background: #fbc02d;
+  color: #333;
+}
+
+.threat-badge.threat-level-low {
+  background: #7cb342;
+  color: white;
+}
+
+.threat-badge.threat-level-none {
+  background: #9e9e9e;
+  color: white;
+}

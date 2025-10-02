@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PacketData, PacketResponse, StatsData, ApiFilters } from '../types/packet';
+import { PacketData, PacketResponse, StatsData, ApiFilters, Device, DeviceDetails, ThreatAlert, AnalyticsData } from '../types/packet';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -37,6 +37,33 @@ export const packetService = {
   // Get statistics
   async getStats(): Promise<StatsData> {
     const response = await api.get('/stats');
+    return response.data;
+  },
+
+  // IDS-specific endpoints
+
+  // Get all devices
+  async getDevices(): Promise<{ devices: Device[]; total: number; timestamp: string }> {
+    const response = await api.get('/devices');
+    return response.data;
+  },
+
+  // Get device details
+  async getDeviceDetails(ip: string): Promise<DeviceDetails> {
+    const response = await api.get(`/devices/${ip}`);
+    return response.data;
+  },
+
+  // Get threats/alerts
+  async getThreats(severity?: string): Promise<{ threats: ThreatAlert[]; total: number; timestamp: string }> {
+    const params = severity ? `?severity=${severity}` : '';
+    const response = await api.get(`/threats${params}`);
+    return response.data;
+  },
+
+  // Get analytics
+  async getAnalytics(): Promise<AnalyticsData> {
+    const response = await api.get('/analytics');
     return response.data;
   },
 };

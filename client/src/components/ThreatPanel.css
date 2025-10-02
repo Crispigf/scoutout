@@ -1,0 +1,167 @@
+.threat-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.threat-panel-header {
+  margin-bottom: 24px;
+}
+
+.threat-panel-header h2 {
+  margin: 0 0 8px 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.threat-subtitle {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.no-threats {
+  text-align: center;
+  padding: 48px;
+  color: #7cb342;
+}
+
+.no-threats-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.no-threats p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.threats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.threat-item {
+  border-left: 4px solid #e0e0e0;
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.threat-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.threat-item.severity-critical {
+  border-left-color: #d32f2f;
+  background: #ffebee;
+}
+
+.threat-item.severity-high {
+  border-left-color: #f57c00;
+  background: #fff3e0;
+}
+
+.threat-item.severity-medium {
+  border-left-color: #fbc02d;
+  background: #fffde7;
+}
+
+.threat-item.severity-low {
+  border-left-color: #1976d2;
+  background: #e3f2fd;
+}
+
+.threat-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.threat-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.threat-info {
+  flex-grow: 1;
+}
+
+.threat-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.threat-meta {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.threat-separator {
+  color: #ccc;
+}
+
+.threat-protocol {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.threat-score-badge {
+  background: #333;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.threat-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 36px;
+}
+
+.threat-detail-item {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.detail-label {
+  color: #666;
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.detail-value {
+  color: #333;
+  flex: 1;
+}
+
+.detail-value.monospace {
+  font-family: 'Courier New', monospace;
+  color: #1976d2;
+}
+
+.threat-footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
