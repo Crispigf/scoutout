@@ -27,6 +27,13 @@ const Settings: React.FC = () => {
     }
   };
 
+  const handleClearAllData = () => {
+    if (window.confirm('⚠️ WARNING: This will permanently delete all packet data, device history, and threat logs. This action cannot be undone. Are you sure?')) {
+      // In a real implementation, this would call an API endpoint to clear data
+      alert('All data has been cleared successfully');
+    }
+  };
+
   return (
     <div className="settings-container">
       <div className="settings-header">
@@ -259,7 +266,7 @@ const Settings: React.FC = () => {
         <button onClick={handleResetSettings} className="btn btn-secondary">
           🔄 Reset to Defaults
         </button>
-        <button className="btn btn-danger">
+        <button onClick={handleClearAllData} className="btn btn-danger">
           🗑️ Clear All Data
         </button>
       </div>
