@@ -1,0 +1,307 @@
+.network-traffic-container {
+  padding: 20px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.traffic-header {
+  margin-bottom: 25px;
+}
+
+.traffic-header h2 {
+  font-size: 2em;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.traffic-subtitle {
+  font-size: 1.1em;
+  color: #666;
+  margin: 0;
+}
+
+/* Filters */
+.traffic-filters {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 200px;
+}
+
+.filter-group label {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.filter-select,
+.filter-input {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.95em;
+  transition: border-color 0.2s;
+}
+
+.filter-select:focus,
+.filter-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.filter-clear {
+  align-self: flex-end;
+  padding: 8px 20px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-clear:hover {
+  background: #5a6268;
+}
+
+/* Statistics Bar */
+.traffic-stats {
+  display: flex;
+  gap: 30px;
+  padding: 15px 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.traffic-stats .stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.traffic-stats .stat-label {
+  font-weight: 600;
+  color: #666;
+}
+
+.traffic-stats .stat-value {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #333;
+}
+
+.traffic-stats .threat-count {
+  color: #d32f2f;
+}
+
+/* Packet Table */
+.traffic-table-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.traffic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.traffic-table thead {
+  background: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.traffic-table th {
+  padding: 15px 12px;
+  text-align: left;
+  font-weight: 700;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+}
+
+.traffic-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.traffic-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.traffic-table tbody tr.critical {
+  background-color: rgba(211, 47, 47, 0.05);
+  border-left: 4px solid #d32f2f;
+}
+
+.traffic-table tbody tr.high {
+  background-color: rgba(245, 124, 0, 0.05);
+  border-left: 4px solid #f57c00;
+}
+
+.traffic-table tbody tr.medium {
+  background-color: rgba(251, 192, 45, 0.05);
+  border-left: 4px solid #fbc02d;
+}
+
+.traffic-table tbody tr.low {
+  background-color: rgba(124, 179, 66, 0.05);
+  border-left: 4px solid #7cb342;
+}
+
+.traffic-table td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.packet-id {
+  font-weight: 600;
+  color: #667eea;
+  font-family: monospace;
+}
+
+.packet-time {
+  font-family: monospace;
+  color: #555;
+  white-space: nowrap;
+}
+
+.packet-ip {
+  font-family: monospace;
+  color: #333;
+}
+
+.packet-ip .port {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.packet-protocol {
+  text-align: center;
+}
+
+.protocol-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85em;
+  display: inline-block;
+}
+
+.packet-length {
+  font-family: monospace;
+  color: #555;
+  text-align: right;
+}
+
+.packet-info {
+  color: #555;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.packet-info .flags {
+  color: #667eea;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.packet-threat {
+  text-align: center;
+  font-size: 1.3em;
+}
+
+.threat-indicator {
+  cursor: help;
+}
+
+.no-packets {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+/* Legend */
+.traffic-legend {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.traffic-legend h4 {
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.legend-items {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-icon {
+  font-size: 1.2em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .traffic-filters {
+    flex-direction: column;
+  }
+  
+  .filter-group {
+    min-width: 100%;
+  }
+  
+  .filter-clear {
+    align-self: stretch;
+  }
+  
+  .traffic-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .traffic-table {
+    font-size: 0.8em;
+  }
+  
+  .traffic-table th,
+  .traffic-table td {
+    padding: 8px 6px;
+  }
+  
+  .packet-info {
+    max-width: 150px;
+  }
+}

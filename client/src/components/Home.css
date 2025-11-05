@@ -1,0 +1,347 @@
+.home-container {
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.home-hero {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.home-title {
+  font-size: 2.5em;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.home-subtitle {
+  font-size: 1.2em;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* Stats Grid */
+.home-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.home-stat-card {
+  display: flex;
+  align-items: center;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.home-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.home-stat-card .stat-icon {
+  font-size: 2.5em;
+  margin-right: 20px;
+}
+
+.home-stat-card .stat-content {
+  flex: 1;
+}
+
+.home-stat-card .stat-value {
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.home-stat-card .stat-label {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.stat-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.stat-danger {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.stat-warning {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #333;
+}
+
+.stat-info {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #333;
+}
+
+/* Content Grid */
+.home-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.home-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.home-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.home-section-header h2 {
+  margin: 0;
+  font-size: 1.3em;
+  color: #333;
+}
+
+.section-count {
+  background: #667eea;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+/* Devices List */
+.home-devices-list {
+  padding: 10px;
+}
+
+.home-device-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin: 5px 0;
+  border-radius: 8px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.home-device-item:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.device-icon-wrapper {
+  font-size: 2em;
+  margin-right: 15px;
+}
+
+.device-info {
+  flex: 1;
+}
+
+.device-ip {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.device-meta {
+  font-size: 0.85em;
+  color: #666;
+}
+
+.device-threat-badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.device-threat-badge.threat-critical {
+  background: #d32f2f;
+  color: white;
+}
+
+.device-threat-badge.threat-high {
+  background: #f57c00;
+  color: white;
+}
+
+.device-threat-badge.threat-medium {
+  background: #fbc02d;
+  color: #333;
+}
+
+.device-threat-badge.threat-low {
+  background: #7cb342;
+  color: white;
+}
+
+.device-threat-badge.threat-none {
+  background: #9e9e9e;
+  color: white;
+}
+
+/* Threats List */
+.home-threats-list {
+  padding: 10px;
+}
+
+.home-threat-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin: 5px 0;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background: #f8f9fa;
+  transition: all 0.2s;
+}
+
+.home-threat-item:hover {
+  background: #e9ecef;
+}
+
+.home-threat-item.severity-critical {
+  border-left-color: #d32f2f;
+}
+
+.home-threat-item.severity-high {
+  border-left-color: #f57c00;
+}
+
+.home-threat-item.severity-medium {
+  border-left-color: #fbc02d;
+}
+
+.home-threat-item.severity-low {
+  border-left-color: #1976d2;
+}
+
+.threat-icon-wrapper {
+  font-size: 1.8em;
+  margin-right: 15px;
+}
+
+.threat-info {
+  flex: 1;
+}
+
+.threat-description {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 0.95em;
+}
+
+.threat-meta {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.threat-score-badge {
+  background: #333;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+/* Health Section */
+.home-health-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-health-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.3em;
+  color: #333;
+}
+
+.health-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.health-metric {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.metric-label {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.empty-state .success-icon {
+  font-size: 3em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .home-title {
+    font-size: 1.8em;
+  }
+  
+  .home-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .home-stat-card .stat-icon {
+    font-size: 2em;
+    margin-right: 10px;
+  }
+  
+  .home-stat-card .stat-value {
+    font-size: 1.5em;
+  }
+}
