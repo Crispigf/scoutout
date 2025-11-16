@@ -14,106 +14,28 @@ body {
 
 .App {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
-.App-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 20px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+/* Page header styles used across pages */
+.page-header {
+  margin-bottom: 30px;
 }
 
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-content h1 {
+.page-header h1 {
+  font-size: 32px;
   margin: 0;
-  font-size: 1.8em;
-  font-weight: 600;
-}
-
-.connection-status {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.status-indicator {
-  font-size: 0.9em;
-  font-weight: 500;
-}
-
-.status-indicator.connected {
-  color: #4CAF50;
-}
-
-.status-indicator.disconnected {
-  color: #f44336;
-}
-
-.refresh-button {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: all 0.2s ease;
-}
-
-.refresh-button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.refresh-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.App-main {
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  width: 100%;
-}
-
-.error-message {
-  background: #ffebee;
-  color: #c62828;
-  padding: 15px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border-left: 4px solid #f44336;
-}
-
-.packets-section h2 {
   color: #333;
-  margin: 30px 0 15px 0;
-  font-size: 1.4em;
+}
+
+.page-header .subtitle {
+  color: #666;
+  margin: 5px 0 0 0;
+  font-size: 16px;
 }
 
 @media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
-  
-  .header-content h1 {
-    font-size: 1.4em;
-  }
-  
-  .App-main {
-    padding: 15px;
+  .page-header h1 {
+    font-size: 24px;
   }
 }
+
