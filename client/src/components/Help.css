@@ -1,0 +1,270 @@
+.help-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.help-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.help-header h2 {
+  font-size: 2.5em;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.help-subtitle {
+  font-size: 1.2em;
+  color: #666;
+  margin: 0;
+}
+
+/* Tabs */
+.help-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e0e0e0;
+  overflow-x: auto;
+}
+
+.help-tab {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  font-size: 1em;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.help-tab:hover {
+  color: #667eea;
+}
+
+.help-tab.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+}
+
+/* Content */
+.help-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  min-height: 500px;
+}
+
+.help-section h3 {
+  font-size: 1.8em;
+  margin: 0 0 30px 0;
+  color: #333;
+}
+
+/* Tutorial Cards */
+.tutorial-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid #667eea;
+}
+
+.tutorial-card h4 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.3em;
+}
+
+.tutorial-card p {
+  margin: 0 0 10px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.tutorial-card ul {
+  margin: 10px 0;
+  padding-left: 25px;
+}
+
+.tutorial-card li {
+  margin: 8px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Feature Cards */
+.feature-card {
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.feature-card:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.feature-icon {
+  font-size: 3em;
+  flex-shrink: 0;
+}
+
+.feature-content h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.3em;
+}
+
+.feature-content p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Troubleshooting Cards */
+.troubleshooting-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid #f57c00;
+}
+
+.troubleshooting-card h4 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.3em;
+}
+
+.problem,
+.solution {
+  font-weight: 700;
+  color: #667eea;
+  margin: 15px 0 5px 0;
+}
+
+.troubleshooting-card p {
+  margin: 0 0 10px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.troubleshooting-card ol {
+  margin: 10px 0;
+  padding-left: 25px;
+}
+
+.troubleshooting-card li {
+  margin: 8px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.troubleshooting-card code {
+  background: #e0e0e0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* FAQ Items */
+.faq-item {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid #7cb342;
+}
+
+.faq-item h4 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.faq-item p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Footer */
+.help-footer {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.help-footer h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.resource-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.resource-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.resource-link:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.link-icon {
+  font-size: 1.5em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .help-header h2 {
+    font-size: 2em;
+  }
+  
+  .help-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .help-content {
+    padding: 20px;
+  }
+  
+  .feature-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .resource-links {
+    grid-template-columns: 1fr;
+  }
+}

@@ -154,19 +154,37 @@ body {
   display: flex;
   gap: 8px;
   background: rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.nav-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.nav-tabs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav-tabs::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
 }
 
 .nav-tab {
   background: transparent;
   color: rgba(255, 255, 255, 0.7);
   border: none;
-  padding: 14px 24px;
+  padding: 14px 20px;
   cursor: pointer;
-  font-size: 0.95em;
+  font-size: 0.9em;
   font-weight: 600;
   transition: all 0.2s ease;
   border-bottom: 3px solid transparent;
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-tab:hover {

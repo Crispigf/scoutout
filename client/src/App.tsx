@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import ThreatPanel from './components/ThreatPanel';
 import Analytics from './components/Analytics';
-import PacketTable from './components/PacketTable';
-import Stats from './components/Stats';
+import NetworkTraffic from './components/NetworkTraffic';
+import ParentalControls from './components/ParentalControls';
+import Settings from './components/Settings';
+import Help from './components/Help';
 import PacketDetail from './components/PacketDetail';
 import DeviceDetailModal from './components/DeviceDetail';
 import packetService from './services/packetService';
@@ -11,13 +14,13 @@ import { PacketData, StatsData, Device, ThreatAlert, AnalyticsData } from './typ
 import './App.css';
 
 function App() {
-  const [view, setView] = useState<'dashboard' | 'threats' | 'analytics' | 'packets'>('dashboard');
+  const [view, setView] = useState<'home' | 'devices' | 'threats' | 'network-traffic' | 'parental-controls' | 'analytics' | 'settings' | 'help'>('home');
   const [devices, setDevices] = useState<Device[]>([]);
   const [threats, setThreats] = useState<ThreatAlert[]>([]);
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [packets, setPackets] = useState<PacketData[]>([]);
   const [stats, setStats] = useState<StatsData | null>(null);
-  const [selectedPacket, setSelectedPacket] = useState<PacketData | null>(null);
+  const [selectedPacket] = useState<PacketData | null>(null);
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
   const [isPacketModalOpen, setIsPacketModalOpen] = useState(false);
   const [isDeviceModalOpen, setIsDeviceModalOpen] = useState(false);
@@ -60,11 +63,6 @@ function App() {
     } catch (err) {
       setIsConnected(false);
     }
-  };
-
-  const handlePacketSelect = (packet: PacketData) => {
-    setSelectedPacket(packet);
-    setIsPacketModalOpen(true);
   };
 
   const handleDeviceSelect = (device: Device) => {
@@ -139,8 +137,14 @@ function App() {
 
         <nav className="nav-tabs">
           <button 
-            className={`nav-tab ${view === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setView('dashboard')}
+            className={`nav-tab ${view === 'home' ? 'active' : ''}`}
+            onClick={() => setView('home')}
+          >
+            🏠 Home
+          </button>
+          <button 
+            className={`nav-tab ${view === 'devices' ? 'active' : ''}`}
+            onClick={() => setView('devices')}
           >
             🖥️ Devices
           </button>
@@ -152,16 +156,34 @@ function App() {
             {threats.length > 0 && <span className="tab-badge">{threats.length}</span>}
           </button>
           <button 
+            className={`nav-tab ${view === 'network-traffic' ? 'active' : ''}`}
+            onClick={() => setView('network-traffic')}
+          >
+            📡 Network Traffic
+          </button>
+          <button 
+            className={`nav-tab ${view === 'parental-controls' ? 'active' : ''}`}
+            onClick={() => setView('parental-controls')}
+          >
+            👨‍👩‍👧‍👦 Parental Controls
+          </button>
+          <button 
             className={`nav-tab ${view === 'analytics' ? 'active' : ''}`}
             onClick={() => setView('analytics')}
           >
             📊 Analytics
           </button>
           <button 
-            className={`nav-tab ${view === 'packets' ? 'active' : ''}`}
-            onClick={() => setView('packets')}
+            className={`nav-tab ${view === 'settings' ? 'active' : ''}`}
+            onClick={() => setView('settings')}
           >
-            📦 Packets
+            ⚙️ Settings
+          </button>
+          <button 
+            className={`nav-tab ${view === 'help' ? 'active' : ''}`}
+            onClick={() => setView('help')}
+          >
+            ❓ Help
           </button>
         </nav>
       </header>
@@ -173,7 +195,17 @@ function App() {
           </div>
         )}
 
-        {view === 'dashboard' && (
+        {view === 'home' && (
+          <Home 
+            devices={devices}
+            threats={threats}
+            stats={stats}
+            analytics={analytics}
+            onDeviceSelect={handleDeviceSelect}
+          />
+        )}
+
+        {view === 'devices' && (
           <Dashboard 
             devices={devices} 
             onDeviceSelect={handleDeviceSelect}
@@ -184,21 +216,24 @@ function App() {
           <ThreatPanel threats={threats} />
         )}
 
+        {view === 'network-traffic' && (
+          <NetworkTraffic packets={packets} />
+        )}
+
+        {view === 'parental-controls' && (
+          <ParentalControls />
+        )}
+
         {view === 'analytics' && (
           <Analytics analytics={analytics} stats={stats} />
         )}
 
-        {view === 'packets' && (
-          <>
-            {stats && <Stats stats={stats} />}
-            <div className="packets-section">
-              <h2>Recent Packets ({packets.length} packets)</h2>
-              <PacketTable 
-                packets={packets} 
-                onPacketSelect={handlePacketSelect}
-              />
-            </div>
-          </>
+        {view === 'settings' && (
+          <Settings />
+        )}
+
+        {view === 'help' && (
+          <Help />
         )}
 
         <PacketDetail
