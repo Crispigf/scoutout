@@ -2,7 +2,7 @@
 
 A modern web application for viewing and analyzing network packet capture data. Built with React frontend and Node.js/Express backend.
 
-![ScoutOut Application](https://github.com/user-attachments/assets/924b4d51-74be-4579-9aaf-7563704639c3)
+![ScoutOut Application](./screenshots/dashboard.png)
 
 ## Features
 
@@ -117,6 +117,21 @@ The frontend is built with React and TypeScript, providing type safety and moder
 ```bash
 npm run build
 ```
+
+## Screenshots
+
+For a complete visual overview of all features, see the [screenshots directory](./screenshots/).
+
+### Main Features
+
+- **Dashboard**: Network security overview with device stats and threat activity
+- **Network Traffic**: Real-time packet analysis with protocol distribution
+- **Devices**: Device inventory with trust levels and bandwidth monitoring
+- **Threats**: Security threat analysis with VirusTotal integration
+- **Analytics**: Historical logs and trends visualization
+- **Parental Controls**: Website blocking and time-based restrictions
+- **Settings**: System configuration and integrations
+- **Help**: Interactive tutorials and documentation
 
 ## Contributing
 
