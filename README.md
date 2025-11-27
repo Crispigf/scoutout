@@ -1,23 +1,23 @@
-# ScoutOut - Packet Capture Viewer
+# Quantum News Dashboard
 
-A modern web application for viewing and analyzing network packet capture data. Built with React frontend and Node.js/Express backend.
-
-![ScoutOut Application](https://github.com/user-attachments/assets/924b4d51-74be-4579-9aaf-7563704639c3)
+A modern web application for tracking quantum computing news and stock performance. Built with React frontend and Node.js/Express backend.
 
 ## Features
 
-- **Real-time Packet Viewing**: Display packet capture data in an easy-to-read table format
-- **Advanced Filtering**: Filter packets by protocol, source IP, destination IP, and packet count
-- **Network Statistics**: View comprehensive statistics including protocol distribution and average packet size
-- **Packet Details**: Click on any packet to view detailed information in a modal
+- **Quantum News Feed**: Display quantum computing articles from various sources
+- **Article Tagging**: Tag articles with categories like PQC (Post-Quantum Cryptography), CPU, Startup, Hardware, Software, Research, Investment, Breakthrough
+- **Import Articles**: Add and tag custom articles to the dashboard
+- **Stock Tracking**: Track quantum computing company stocks (IBM, IONQ, Google, Microsoft, etc.)
+- **Interactive Charts**: View 30-day price history and trading volume
+- **Dashboard Overview**: Quick stats on articles, tag distribution, and top stock movers
 - **Responsive Design**: Works on desktop and mobile devices
-- **Connection Status**: Real-time API connection status indicator
 
 ## Technology Stack
 
 - **Frontend**: React with TypeScript
 - **Backend**: Node.js with Express
-- **Styling**: Custom CSS with responsive design
+- **Charts**: Recharts for data visualization
+- **Styling**: Custom CSS with modern gradient design
 - **HTTP Client**: Axios for API communication
 
 ## Quick Start
@@ -66,28 +66,40 @@ npm run client
 
 ## API Endpoints
 
+### Articles
+- `GET /api/articles` - Get quantum news articles with optional filters
+- `GET /api/articles/:id` - Get specific article details
+- `POST /api/articles` - Import a new article
+- `PATCH /api/articles/:id/tags` - Update article tags
+- `DELETE /api/articles/:id` - Delete an imported article
+
+### Stocks
+- `GET /api/stocks` - Get all tracked quantum company stocks
+- `GET /api/stocks/:symbol` - Get specific stock details
+- `GET /api/stocks/:symbol/history` - Get 30-day price history
+
+### Other
 - `GET /api/health` - Check API health status
-- `GET /api/packets` - Get packet data with optional filters
-- `GET /api/packets/:id` - Get specific packet details
-- `GET /api/stats` - Get network statistics
+- `GET /api/stats` - Get dashboard statistics
+- `GET /api/tags` - Get available article tags
 
-### Query Parameters for /api/packets
+### Query Parameters for /api/articles
 
-- `limit` - Number of packets to return (default: 50)
-- `protocol` - Filter by protocol (TCP, UDP, HTTP, etc.)
-- `sourceIP` - Filter by source IP address
-- `destIP` - Filter by destination IP address
+- `limit` - Number of articles to return (default: 50)
+- `tag` - Filter by tag (pqc, cpu, startup, hardware, software, research, investment, breakthrough)
+- `search` - Search in title and summary
 
 ## Project Structure
 
 ```
 scoutout/
 ├── server/
-│   └── index.js              # Express API server
+│   └── index.js              # Express API server with quantum news endpoints
 ├── client/
 │   ├── src/
 │   │   ├── components/       # React components
-│   │   ├── services/         # API service layer
+│   │   ├── pages/           # Page components (Dashboard, QuantumNews, Stocks)
+│   │   ├── services/        # API service layer
 │   │   ├── types/           # TypeScript interfaces
 │   │   └── App.tsx          # Main application component
 │   └── public/              # Static assets
@@ -95,22 +107,52 @@ scoutout/
 └── README.md               # This file
 ```
 
-## Components
+## Pages
 
-- **PacketTable**: Displays packets in a sortable table
-- **Stats**: Shows network statistics and protocol distribution
-- **Filters**: Provides filtering controls
-- **PacketDetail**: Modal for viewing detailed packet information
+- **Dashboard**: Overview with stats, tag distribution, stock movers, and recent articles
+- **Quantum News**: Browse and search articles, filter by tags, import new articles
+- **Stocks**: Track quantum computing stocks with interactive price charts
+
+## Tracked Quantum Companies
+
+- IBM Corporation
+- Alphabet Inc (Google)
+- IonQ Inc
+- Rigetti Computing
+- D-Wave Quantum Inc
+- Honeywell International
+- Microsoft Corporation
+- Amazon.com Inc
+
+## Article Tags
+
+| Tag | Description |
+|-----|-------------|
+| pqc | Post-Quantum Cryptography |
+| cpu | Quantum Processors/CPUs |
+| startup | Quantum Startups |
+| hardware | Hardware developments |
+| software | Software & algorithms |
+| research | Research & papers |
+| investment | Funding & investments |
+| breakthrough | Major breakthroughs |
 
 ## Development
 
 ### Backend Development
 
-The backend uses mock data to simulate packet capture information. In a production environment, this would connect to actual packet capture sources or databases.
+The backend provides RESTful APIs for quantum news articles and stock data. It currently uses mock data that can be extended to integrate with real APIs like:
+- The Quantum Insider API
+- News APIs (NewsAPI, etc.)
+- Stock APIs (Alpha Vantage, Yahoo Finance, etc.)
 
 ### Frontend Development
 
-The frontend is built with React and TypeScript, providing type safety and modern development experience.
+The frontend is built with React and TypeScript, featuring:
+- Modern gradient-based design
+- Responsive layout
+- Interactive charts
+- Modal forms for article import
 
 ### Building for Production
 
