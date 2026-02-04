@@ -12,12 +12,46 @@
   font-size: 32px;
   margin: 0;
   color: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .page-header .subtitle {
   color: #666;
   margin: 5px 0 0 0;
   font-size: 16px;
+}
+
+/* Loading and Error States */
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #666;
+}
+
+.loading-state .spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.error-state button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* Stats Grid */
@@ -91,230 +125,167 @@
   font-weight: 600;
 }
 
-/* Network Health Card */
-.network-health-card {
-  grid-column: span 1;
-}
-
-.health-gauge-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
-}
-
-.health-gauge {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.health-circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 8px solid;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  z-index: 2;
-  position: relative;
-}
-
-.health-value {
-  font-size: 36px;
-  font-weight: 700;
-  color: #333;
-}
-
-.health-label {
-  font-size: 14px;
-  color: #666;
-  margin-top: 5px;
-}
-
-.pulse-ring {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 8px solid;
-  opacity: 0.3;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-}
-
-/* Threat Activity Card */
-.threat-activity-card {
-  grid-column: span 1;
-}
-
-/* New Devices Card */
-.new-devices-card {
-  grid-column: span 1;
-}
-
-.devices-list {
+/* Tag Distribution Card */
+.tag-distribution {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.device-item {
+.tag-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  justify-content: space-between;
+  padding: 8px 12px;
   background: #f8f9fa;
   border-radius: 8px;
-  transition: background 0.2s;
 }
 
-.device-item:hover {
-  background: #e9ecef;
-}
-
-.device-info {
-  flex: 1;
-}
-
-.device-name {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 4px;
-}
-
-.device-details {
+.tag-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
   font-size: 12px;
-  color: #666;
-}
-
-.device-time {
-  font-size: 12px;
-  color: #999;
-}
-
-/* Top Threats Card */
-.top-threats-card {
-  grid-column: span 1;
-}
-
-.threats-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.threat-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  transition: background 0.2s;
-}
-
-.threat-item:hover {
-  background: #ffebee;
-}
-
-.threat-info {
-  flex: 1;
-}
-
-.threat-domain {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 4px;
-}
-
-.threat-ip {
-  font-size: 12px;
-  color: #666;
-}
-
-.threat-meta {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.threat-severity-badge {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 11px;
   font-weight: 600;
   color: white;
   text-transform: uppercase;
 }
 
-.threat-count {
-  font-size: 12px;
+.tag-count {
+  font-size: 14px;
   color: #666;
 }
 
-/* Alerts Card */
-.alerts-card {
-  grid-column: span 2;
-}
-
-.alerts-timeline {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.alert-item {
+/* Stock Movers Card */
+.stock-list {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
 }
 
-.alert-item:last-child {
-  border-bottom: none;
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: background 0.2s;
 }
 
-.alert-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-top: 6px;
-  flex-shrink: 0;
+.stock-item.gainer:hover {
+  background: #E8F5E9;
 }
 
-.alert-content {
+.stock-item.loser:hover {
+  background: #FFEBEE;
+}
+
+.stock-info {
   flex: 1;
 }
 
-.alert-message {
+.stock-symbol {
+  font-weight: 700;
   color: #333;
-  margin-bottom: 4px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
-.alert-timestamp {
+.stock-name {
   font-size: 12px;
-  color: #999;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.stock-price {
+  text-align: right;
+}
+
+.stock-price .price {
+  font-weight: 600;
+  color: #333;
+}
+
+.stock-price .change {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stock-price .change.positive {
+  color: #4CAF50;
+}
+
+.stock-price .change.negative {
+  color: #F44336;
+}
+
+/* Recent Articles Card */
+.recent-articles-card {
+  grid-column: span 2;
+}
+
+.articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-item {
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.article-item:hover {
+  background: #E3F2FD;
+  transform: translateX(4px);
+}
+
+.article-title {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.article-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.article-source {
+  font-weight: 500;
+}
+
+.article-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.mini-tag {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Stock Chart Card */
+.stock-chart-card {
+  grid-column: span 1;
+}
+
+.stock-chart-container {
+  margin-top: 10px;
 }
 
 /* Responsive Design */
@@ -327,9 +298,12 @@
     grid-template-columns: 1fr;
   }
 
-  .alerts-card,
-  .threat-activity-card,
-  .top-threats-card {
+  .recent-articles-card,
+  .stock-chart-card {
     grid-column: span 1;
+  }
+
+  .stock-name {
+    max-width: 100px;
   }
 }

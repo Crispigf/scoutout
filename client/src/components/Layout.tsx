@@ -2,13 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   FiHome, 
-  FiActivity, 
-  FiShield, 
-  FiBarChart2, 
-  FiAlertTriangle, 
-  FiMonitor, 
-  FiSettings, 
-  FiHelpCircle 
+  FiFileText, 
+  FiTrendingUp
 } from 'react-icons/fi';
 import './Layout.css';
 
@@ -21,8 +16,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="layout">
       <nav className="sidebar">
         <div className="sidebar-header">
-          <FiShield size={32} color="#2196F3" />
-          <h1>ScoutOut</h1>
+          <div className="logo-icon">⚛</div>
+          <h1>Quantum News</h1>
         </div>
         
         <div className="sidebar-menu">
@@ -31,40 +26,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <span>Dashboard</span>
           </NavLink>
           
-          <NavLink to="/traffic" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
-            <FiActivity size={20} />
-            <span>Network Traffic</span>
+          <NavLink to="/news" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
+            <FiFileText size={20} />
+            <span>Quantum News</span>
           </NavLink>
           
-          <NavLink to="/parental-controls" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
-            <FiShield size={20} />
-            <span>Parental Controls</span>
+          <NavLink to="/stocks" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
+            <FiTrendingUp size={20} />
+            <span>Stocks</span>
           </NavLink>
-          
-          <NavLink to="/analytics" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
-            <FiBarChart2 size={20} />
-            <span>Analytics</span>
-          </NavLink>
-          
-          <NavLink to="/threats" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
-            <FiAlertTriangle size={20} />
-            <span>Threats</span>
-          </NavLink>
-          
-          <NavLink to="/devices" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
-            <FiMonitor size={20} />
-            <span>Devices</span>
-          </NavLink>
-          
-          <NavLink to="/settings" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
-            <FiSettings size={20} />
-            <span>Settings</span>
-          </NavLink>
-          
-          <NavLink to="/help" className={({ isActive }) => isActive ? 'menu-item active' : 'menu-item'}>
-            <FiHelpCircle size={20} />
-            <span>Help</span>
-          </NavLink>
+        </div>
+        
+        <div className="sidebar-footer">
+          <p>Quantum Computing Dashboard</p>
         </div>
       </nav>
       

@@ -1,7 +1,7 @@
 {
   "name": "scoutout",
   "version": "1.0.0",
-  "description": "Packet capture data viewer application",
+  "description": "Quantum News Dashboard - Track quantum computing news and stock performance",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
@@ -20,7 +20,7 @@
     "nodemon": "^2.0.22",
     "concurrently": "^7.6.0"
   },
-  "keywords": ["packet-capture", "network", "monitoring", "react", "express"],
+  "keywords": ["quantum", "computing", "news", "stocks", "dashboard", "react", "express"],
   "author": "",
   "license": "MIT"
 }

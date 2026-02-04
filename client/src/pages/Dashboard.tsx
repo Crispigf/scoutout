@@ -1,83 +1,42 @@
-import React, { useState } from 'react';
-import { FiActivity, FiAlertTriangle, FiUsers, FiFilter } from 'react-icons/fi';
-import { LineChart, Line, ResponsiveContainer, Tooltip } from 'recharts';
+import React, { useState, useEffect } from 'react';
+import { FiFileText, FiTrendingUp, FiTrendingDown, FiTag, FiRefreshCw } from 'react-icons/fi';
+import { LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { getDashboardStats, getArticles, getStocks } from '../services/quantumService';
+import { DashboardStats, Article, Stock } from '../types/packet';
 import './Dashboard.css';
 
-interface DashboardStats {
-  totalDevices: number;
-  packetsScanned: number;
-  threatsBlocked: number;
-  parentalBlocks: number;
-  networkHealth: number;
-}
-
-interface Alert {
-  id: number;
-  timestamp: string;
-  type: 'threat' | 'device' | 'parental';
-  message: string;
-  severity: 'low' | 'medium' | 'high';
-}
-
-interface NewDevice {
-  id: number;
-  name: string;
-  ip: string;
-  joinedAt: string;
-  type: string;
-}
-
-interface Threat {
-  id: number;
-  domain: string;
-  ip: string;
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  count: number;
-}
-
 const Dashboard: React.FC = () => {
-  const [stats] = useState<DashboardStats>({
-    totalDevices: 12,
-    packetsScanned: 45823,
-    threatsBlocked: 47,
-    parentalBlocks: 23,
-    networkHealth: 92
-  });
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [recentArticles, setRecentArticles] = useState<Article[]>([]);
+  const [stocks, setStocks] = useState<Stock[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const [alerts] = useState<Alert[]>([
-    { id: 1, timestamp: new Date().toISOString(), type: 'threat', message: 'Malicious domain blocked: evil.com', severity: 'high' },
-    { id: 2, timestamp: new Date(Date.now() - 300000).toISOString(), type: 'device', message: 'New device joined: iPhone-12', severity: 'low' },
-    { id: 3, timestamp: new Date(Date.now() - 600000).toISOString(), type: 'parental', message: 'Blocked gaming site at 10 PM', severity: 'medium' },
-    { id: 4, timestamp: new Date(Date.now() - 900000).toISOString(), type: 'threat', message: 'Suspicious DNS query detected', severity: 'medium' },
-    { id: 5, timestamp: new Date(Date.now() - 1200000).toISOString(), type: 'device', message: 'Device disconnected: Smart-TV', severity: 'low' }
-  ]);
-
-  const [newDevices] = useState<NewDevice[]>([
-    { id: 1, name: 'iPhone-12', ip: '192.168.1.105', joinedAt: new Date(Date.now() - 3600000).toISOString(), type: 'Mobile' },
-    { id: 2, name: 'Smart-Fridge', ip: '192.168.1.112', joinedAt: new Date(Date.now() - 7200000).toISOString(), type: 'IoT' },
-    { id: 3, name: 'Gaming-PC', ip: '192.168.1.98', joinedAt: new Date(Date.now() - 14400000).toISOString(), type: 'Computer' }
-  ]);
-
-  const [topThreats] = useState<Threat[]>([
-    { id: 1, domain: 'malware.example.com', ip: '45.33.32.156', severity: 'critical', count: 15 },
-    { id: 2, domain: 'phishing-site.net', ip: '104.28.12.34', severity: 'high', count: 8 },
-    { id: 3, domain: 'suspicious-ads.com', ip: '172.67.133.45', severity: 'medium', count: 5 }
-  ]);
-
-  const [threatActivity] = useState([
-    { time: '00:00', threats: 2 },
-    { time: '04:00', threats: 1 },
-    { time: '08:00', threats: 5 },
-    { time: '12:00', threats: 8 },
-    { time: '16:00', threats: 12 },
-    { time: '20:00', threats: 7 },
-    { time: '24:00', threats: 4 }
-  ]);
-
-  const formatTimestamp = (timestamp: string) => {
-    const date = new Date(timestamp);
-    return date.toLocaleString();
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const [statsData, articlesData, stocksData] = await Promise.all([
+        getDashboardStats(),
+        getArticles({ limit: 5 }),
+        getStocks()
+      ]);
+      setStats(statsData);
+      setRecentArticles(articlesData.articles);
+      setStocks(stocksData.stocks);
+    } catch (err) {
+      setError('Failed to fetch dashboard data');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    fetchData();
+    const interval = setInterval(fetchData, 60000); // Refresh every minute
+    return () => clearInterval(interval);
+  }, []);
 
   const formatRelativeTime = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -92,163 +51,187 @@ const Dashboard: React.FC = () => {
     return `${diffDays}d ago`;
   };
 
-  const getSeverityColor = (severity: string) => {
-    const colors = {
-      low: '#4CAF50',
-      medium: '#FF9800',
-      high: '#FF5722',
-      critical: '#D32F2F'
+  const getTagColor = (tag: string) => {
+    const colors: Record<string, string> = {
+      pqc: '#9C27B0',
+      cpu: '#2196F3',
+      startup: '#4CAF50',
+      hardware: '#FF9800',
+      software: '#00BCD4',
+      research: '#3F51B5',
+      investment: '#E91E63',
+      breakthrough: '#FF5722'
     };
-    return colors[severity as keyof typeof colors] || '#666';
+    return colors[tag] || '#666';
   };
 
-  const getHealthColor = (health: number) => {
-    if (health >= 80) return '#4CAF50';
-    if (health >= 60) return '#FF9800';
-    return '#FF5722';
-  };
+  if (loading) {
+    return (
+      <div className="dashboard-page">
+        <div className="loading-state">
+          <FiRefreshCw className="spin" size={32} />
+          <p>Loading dashboard data...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="dashboard-page">
+        <div className="error-state">
+          <p>{error}</p>
+          <button onClick={fetchData}>Retry</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard-page">
       <div className="page-header">
-        <h1>Dashboard</h1>
-        <p className="subtitle">Network Security Overview</p>
+        <h1>Quantum News Dashboard</h1>
+        <p className="subtitle">Stay updated with the latest in quantum computing</p>
       </div>
 
       {/* Quick Stats Cards */}
       <div className="stats-grid">
         <div className="stat-card">
           <div className="stat-icon" style={{ backgroundColor: '#E3F2FD' }}>
-            <FiUsers color="#2196F3" size={24} />
+            <FiFileText color="#2196F3" size={24} />
           </div>
           <div className="stat-content">
-            <div className="stat-value">{stats.totalDevices}</div>
-            <div className="stat-label">Total Devices</div>
+            <div className="stat-value">{stats?.totalArticles || 0}</div>
+            <div className="stat-label">Total Articles</div>
           </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon" style={{ backgroundColor: '#F3E5F5' }}>
-            <FiActivity color="#9C27B0" size={24} />
+            <FiTag color="#9C27B0" size={24} />
           </div>
           <div className="stat-content">
-            <div className="stat-value">{stats.packetsScanned.toLocaleString()}</div>
-            <div className="stat-label">Packets Scanned Today</div>
+            <div className="stat-value">{stats?.importedArticles || 0}</div>
+            <div className="stat-label">Imported Articles</div>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon" style={{ backgroundColor: '#E8F5E9' }}>
+            <FiTrendingUp color="#4CAF50" size={24} />
+          </div>
+          <div className="stat-content">
+            <div className="stat-value">{stats?.topGainers?.length || 0}</div>
+            <div className="stat-label">Top Gainers</div>
           </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon" style={{ backgroundColor: '#FFEBEE' }}>
-            <FiAlertTriangle color="#F44336" size={24} />
+            <FiTrendingDown color="#F44336" size={24} />
           </div>
           <div className="stat-content">
-            <div className="stat-value">{stats.threatsBlocked}</div>
-            <div className="stat-label">Threats Blocked</div>
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-icon" style={{ backgroundColor: '#FFF3E0' }}>
-            <FiFilter color="#FF9800" size={24} />
-          </div>
-          <div className="stat-content">
-            <div className="stat-value">{stats.parentalBlocks}</div>
-            <div className="stat-label">Parental Control Blocks</div>
+            <div className="stat-value">{stats?.stocksTracked || 0}</div>
+            <div className="stat-label">Stocks Tracked</div>
           </div>
         </div>
       </div>
 
       <div className="dashboard-grid">
-        {/* Network Health Gauge */}
-        <div className="dashboard-card network-health-card">
-          <h3>Network Health</h3>
-          <div className="health-gauge-container">
-            <div className="health-gauge">
-              <div 
-                className="health-circle"
-                style={{ borderColor: getHealthColor(stats.networkHealth) }}
-              >
-                <div className="health-value">{stats.networkHealth}%</div>
-                <div className="health-label">Healthy</div>
-              </div>
-              <div className="pulse-ring" style={{ borderColor: getHealthColor(stats.networkHealth) }}></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Threat Activity Sparkline */}
-        <div className="dashboard-card threat-activity-card">
-          <h3>Threat Activity (24h)</h3>
-          <ResponsiveContainer width="100%" height={150}>
-            <LineChart data={threatActivity}>
-              <Line 
-                type="monotone" 
-                dataKey="threats" 
-                stroke="#F44336" 
-                strokeWidth={2}
-                dot={false}
-              />
-              <Tooltip />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* New Devices Widget */}
-        <div className="dashboard-card new-devices-card">
-          <h3>New Devices</h3>
-          <div className="devices-list">
-            {newDevices.map(device => (
-              <div key={device.id} className="device-item">
-                <div className="device-info">
-                  <div className="device-name">{device.name}</div>
-                  <div className="device-details">{device.ip} • {device.type}</div>
-                </div>
-                <div className="device-time">{formatRelativeTime(device.joinedAt)}</div>
+        {/* Tag Distribution */}
+        <div className="dashboard-card tag-distribution-card">
+          <h3>Tag Distribution</h3>
+          <div className="tag-distribution">
+            {stats?.tagDistribution && Object.entries(stats.tagDistribution).map(([tag, count]) => (
+              <div key={tag} className="tag-item">
+                <span className="tag-badge" style={{ backgroundColor: getTagColor(tag) }}>
+                  {tag}
+                </span>
+                <span className="tag-count">{count} articles</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Top Threats Banner */}
-        <div className="dashboard-card top-threats-card">
-          <h3>Top Threats</h3>
-          <div className="threats-list">
-            {topThreats.map(threat => (
-              <div key={threat.id} className="threat-item">
-                <div className="threat-info">
-                  <div className="threat-domain">{threat.domain}</div>
-                  <div className="threat-ip">{threat.ip}</div>
+        {/* Top Gainers */}
+        <div className="dashboard-card stock-movers-card">
+          <h3>Top Gainers</h3>
+          <div className="stock-list">
+            {stats?.topGainers?.map((stock) => (
+              <div key={stock.symbol} className="stock-item gainer">
+                <div className="stock-info">
+                  <div className="stock-symbol">{stock.symbol}</div>
+                  <div className="stock-name">{stock.name}</div>
                 </div>
-                <div className="threat-meta">
-                  <span 
-                    className="threat-severity-badge"
-                    style={{ backgroundColor: getSeverityColor(threat.severity) }}
-                  >
-                    {threat.severity}
-                  </span>
-                  <span className="threat-count">{threat.count} blocks</span>
+                <div className="stock-price">
+                  <div className="price">${stock.price.toFixed(2)}</div>
+                  <div className="change positive">+{stock.changePercent.toFixed(2)}%</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Recent Alerts Timeline */}
-        <div className="dashboard-card alerts-card">
-          <h3>Recent Alerts</h3>
-          <div className="alerts-timeline">
-            {alerts.map(alert => (
-              <div key={alert.id} className="alert-item">
-                <div 
-                  className="alert-indicator"
-                  style={{ backgroundColor: getSeverityColor(alert.severity) }}
-                ></div>
-                <div className="alert-content">
-                  <div className="alert-message">{alert.message}</div>
-                  <div className="alert-timestamp">{formatTimestamp(alert.timestamp)}</div>
+        {/* Top Losers */}
+        <div className="dashboard-card stock-movers-card">
+          <h3>Top Losers</h3>
+          <div className="stock-list">
+            {stats?.topLosers?.map((stock) => (
+              <div key={stock.symbol} className="stock-item loser">
+                <div className="stock-info">
+                  <div className="stock-symbol">{stock.symbol}</div>
+                  <div className="stock-name">{stock.name}</div>
+                </div>
+                <div className="stock-price">
+                  <div className="price">${stock.price.toFixed(2)}</div>
+                  <div className="change negative">{stock.changePercent.toFixed(2)}%</div>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Recent Articles */}
+        <div className="dashboard-card recent-articles-card">
+          <h3>Recent Articles</h3>
+          <div className="articles-list">
+            {recentArticles.map((article) => (
+              <div key={article.id} className="article-item">
+                <div className="article-content">
+                  <div className="article-title">{article.title}</div>
+                  <div className="article-meta">
+                    <span className="article-source">{article.source}</span>
+                    <span className="article-time">{formatRelativeTime(article.publishedAt)}</span>
+                  </div>
+                  <div className="article-tags">
+                    {article.tags.map((tag) => (
+                      <span 
+                        key={tag} 
+                        className="mini-tag"
+                        style={{ backgroundColor: getTagColor(tag) }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Stock Overview Chart */}
+        <div className="dashboard-card stock-chart-card">
+          <h3>Quantum Stocks Overview</h3>
+          <div className="stock-chart-container">
+            <ResponsiveContainer width="100%" height={200}>
+              <LineChart data={stocks.map(s => ({ name: s.symbol, price: s.price }))}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="price" stroke="#2196F3" strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
